@@ -25,6 +25,12 @@ def calculate_streak(user_id: str) -> int:
 
     Returns:
         The streak count as an integer.
+
+
+    The docstring says: That a books streak is calculated based on the consectutive days that a book was finished.
+    The code does:      Counts the streak of days a book was started
+    The bug is on line: 41
+    The fix is:         changing e.started_at.date() to e.finished_at.date()
     """
     events = reading_service.get_reading_history(user_id)
     if not events:
@@ -32,7 +38,7 @@ def calculate_streak(user_id: str) -> int:
 
     # Collect unique reading dates, most recent first.
     dates = sorted(
-        set(e.started_at.date() for e in events),
+        set(e.finished_at.date() for e in events),
         reverse=True,
     )
 

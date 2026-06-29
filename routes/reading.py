@@ -75,7 +75,9 @@ def currently_reading(user_id):
 
 @reading_bp.route("/history/<user_id>", methods=["GET"])
 def reading_history(user_id):
-    """Return the books a user has finished, most recently finished first."""
+    """
+    Return the books a user has finished, most recently finished first.
+    """
     events = reading_service.get_reading_history(user_id)
     result = []
     for e in events:

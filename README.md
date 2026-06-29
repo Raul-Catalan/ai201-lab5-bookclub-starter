@@ -57,6 +57,10 @@ After seeding, use `curl` or any HTTP client. The seed script prints all three u
 curl http://127.0.0.1:5000/books/
 
 # Get alex's stats (replace USER_ID with the ID printed by seed_data.py)
+# USER_ID's: 
+# alex: b521ab81-5417-4076-9814-73cfa392800b
+# priya: 698b3915-4cde-4575-82d2-5ff0f552ab88
+# marcus: 394320a7-6c46-4c7d-b6e9-cc880d7183fe
 curl http://127.0.0.1:5000/stats/USER_ID
 
 # Get alex's reading history

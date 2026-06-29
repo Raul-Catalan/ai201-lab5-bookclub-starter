@@ -14,7 +14,11 @@ def generate_uuid():
 
 
 class User(db.Model):
-    """A BookClub member."""
+    """A BookClub member.
+    
+    User has a reading_streak column. Does the stats endpoint use it? (Check routes/stats.py before guessing.)
+    No the stats route calculates the reading streak by calculating the numbers of days from started.
+    """
 
     id = db.Column(db.String(36), primary_key=True, default=generate_uuid)
     username = db.Column(db.String(64), unique=True, nullable=False)
@@ -69,6 +73,18 @@ class ReadingEvent(db.Model):
 
     started_at  — when the user began reading (always set)
     finished_at — when the user marked the book as finished (None if still reading)
+
+    What fields does ReadingEvent have? Which ones are always set, and which can be null?
+    Reading Event has an id, the associated user_id, the book_id, started_at which is datetime, and finished_at which is also datetime.
+    Everything is set and not nullable except the finished_at field.
+
+    What does the UniqueConstraint on ReadingEvent prevent?
+    UniqueConstraint prevents the combination of user_id and book_id from being in two seperate rows.
+    What this means is that a user can only have one entry with a specific book once, a user cannot read and finish a book, then some time later read and finish that same book.
+    This also prevents users from starting the same book multiple times.
+
+
+    
     """
 
     id = db.Column(db.String(36), primary_key=True, default=generate_uuid)
